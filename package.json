@@ -1,0 +1,73 @@
+{
+  "name": "nano",
+  "version": "1.0.0",
+  "description": "My Moleculer-based microservice",
+  "scripts": {
+    "dev": "ts-node ./node_modules/moleculer/bin/moleculer-runner.js --hot --repl --env --config moleculer.dev.config.ts service.ts",
+    "start": "moleculer-runner --env --config dist/moleculer.config.js",
+    "ci": "jest --watch",
+    "test": "jest --coverage",
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc --build tsconfig.json",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "microservices",
+    "moleculer"
+  ],
+  "author": "Antonio Orozco <orozco6453@gmail.com>",
+  "email": "orozco6453@gmail.com",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "husky": "^7.0.4",
+    "jest": "^28.0.3",
+    "jest-cli": "^28.0.3",
+    "lint-staged": ">=12",
+    "moleculer-repl": "^0.7.0",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0"
+  },
+  "dependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/lodash": "^4.14.182",
+    "@types/mkdirp": "^1.0.2",
+    "@types/node": "^17.0.31",
+    "dayjs": "^1.11.1",
+    "dotenv": "^16.0.0",
+    "lodash": "^4.17.21",
+    "moleculer": "^0.14.21",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.2",
+    "nats": "^2.6.1",
+    "typescript": "^4.6.4"
+  },
+  "eslintIgnore": [
+    "*.test.js"
+  ],
+  "engines": {
+    "node": ">= 10.x.x"
+  },
+  "jest": {
+    "coverageDirectory": "<rootDir>/coverage",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/*.spec.(ts|js)"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix"
+  }
+}
