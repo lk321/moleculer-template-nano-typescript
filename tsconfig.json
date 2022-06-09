@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
 	"compilerOptions": {
 		"module": "commonjs",
 		"esModuleInterop": true,
@@ -7,8 +8,19 @@
 		"preserveConstEnums": true,
 		"sourceMap": true,
 		"pretty": true,
-		"target": "es6",
-		"outDir": "dist"
+		"outDir": "dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true, 
+    "strictPropertyInitialization": true,
+    "target": "esnext",
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true 
 	},
 	"include": ["./**/*"],
 	"exclude": [
