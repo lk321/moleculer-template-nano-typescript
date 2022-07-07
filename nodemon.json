@@ -1,0 +1,6 @@
+{
+  "watch": ["."],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "ts-node --files ./node_modules/moleculer/bin/moleculer-runner.js --repl --env --config moleculer.dev.config.ts"
+}

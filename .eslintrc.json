@@ -5,7 +5,7 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["airbnb-base", "airbnb-typescript/base"],
+  "extends": ["airbnb-base", "airbnb-typescript/base", "plugin:sonarjs/recommended"],
   "parser": "@typescript-eslint/parser",
   "ignorePatterns": ["test/*", "dist/*"],
   "parserOptions": {
@@ -13,7 +13,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["prefer-arrow", "import", "@typescript-eslint"],
+  "plugins": ["prefer-arrow", "import", "@typescript-eslint", "sonarjs"],
   "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "class-methods-use-this": "off"

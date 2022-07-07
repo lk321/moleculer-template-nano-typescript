@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import { BrokerOptions } from 'moleculer';
 
-import { getUniqId } from './utils/func';
+import { getUniqId } from './src/utils/func';
 
 let nodeID = null;
 if (require('fs').existsSync('./package.json')) nodeID = require('./package.json').name;
