@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '🕵️  Verifying that the commit comment is well done...'
+
+npx --no-install commitlint --edit "$1" ||
+(
+    echo '❌ How disgust you give me 🤢, you are a piece of sh#t ❌
+            Read this https://bit.ly/2IDp10m
+    '
+    false;
+)
+
+# If everything passes... Now we can push
+echo 'Nice ✅✅✅✅'

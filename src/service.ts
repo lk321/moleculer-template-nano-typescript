@@ -1,24 +1,31 @@
-import {
-  Service,
-  ServiceBroker,
-} from 'moleculer';
+import 'reflect-metadata';
+import type { Service, ServiceSchema } from 'moleculer';
 
 import * as actions from './actions';
 import loaders from './loaders';
 
-export default class extends Service {
-  public constructor(public broker: ServiceBroker) {
-    super(broker);
+type Settings = object;
 
-    this.parseServiceSchema({
-      name: 'nano',
-      actions,
-      started: async () => {
-        await loaders.init();
-      },
-      async stopped() {
-        await loaders.destroy();
-      },
-    });
-  }
-}
+type Methods = object;
+
+type LocalVars = {
+  myVar: string;
+};
+
+type Actions = typeof actions;
+
+export type NanoThis = Service<Settings> & Methods & LocalVars & Actions;
+
+const NanoMicroService: ServiceSchema<Settings> = {
+  name: 'nano',
+  actions,
+  methods: {},
+  started: async () => {
+    await loaders.init();
+  },
+  async stopped() {
+    await loaders.destroy();
+  },
+};
+
+export default NanoMicroService;

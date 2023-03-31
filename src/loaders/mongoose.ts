@@ -1,35 +1,53 @@
-import mongoose from 'mongoose';
+import {
+  set, connect, disconnect, Mongoose,
+} from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
-const {
-  MONGO_URI,
-  MONGO_DEFAULT_DATABASE,
-} = process.env;
+set('strictQuery', false);
 
-let cachedDB: any = null;
+interface InitializeOptions {
+  dbName?: string;
+  authSource?: string;
+  directConnection?: boolean;
+  autoIndex?: boolean;
+}
 
-export const initialize = async (
-  {
-    dbName = MONGO_DEFAULT_DATABASE,
-    authSource = 'admin',
-    directConnection = true,
-    autoIndex = true,
-  } = {},
-) => {
-  if (!cachedDB) {
-    cachedDB = await mongoose.connect(MONGO_URI, {
-      dbName,
-      authSource,
-      directConnection,
-      autoIndex,
+let cachedConnectionPromise: Promise<Mongoose> | null = null;
+let cachedDBTest: MongoMemoryServer;
+
+export const initialize = async (options: InitializeOptions = {}) => {
+  let mongoConnectionUri = process.env.CONN_URL;
+
+  if (!cachedDBTest && process.env.NODE_ENV === 'test') {
+    cachedDBTest = await MongoMemoryServer.create();
+    mongoConnectionUri = cachedDBTest.getUri();
+  }
+
+  if (!cachedConnectionPromise) {
+    cachedConnectionPromise = connect(mongoConnectionUri as string, {
+      dbName: options?.dbName || process.env.CONN_DEFAULT_DATABASE,
+      authSource: options?.authSource || 'admin',
+      directConnection: options?.directConnection || false,
+      autoIndex: options?.autoIndex ?? true,
     });
   }
+
+  return cachedConnectionPromise;
 };
 
 export const destroy = async () => {
-  if (cachedDB) {
-    await cachedDB.connection.close();
-    await mongoose.disconnect();
+  if (cachedConnectionPromise) {
+    const connection = await cachedConnectionPromise;
 
-    cachedDB = null;
+    await connection.connection.close();
+    await disconnect();
+
+    cachedConnectionPromise = null;
+  }
+
+  if (process.env.NODE_ENV === 'test' && cachedDBTest) {
+    await cachedDBTest.stop();
   }
 };
+
+export const getCachedConnection = async () => cachedConnectionPromise;

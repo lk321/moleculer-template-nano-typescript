@@ -1,0 +1,26 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "msrp",
+    "scac",
+    "xparcel",
+    "pitney",
+    "commitlint",
+    "expeditable",
+    "sonarjs",
+    "typedi",
+    "nats"
+  ],
+  "ignoreWords": ["unsets"],
+  "ignorePaths": [
+    "node_modules/**",
+    "endpoints/**",
+    "*coverage/**",
+    ".husky/**",
+    ".github/**",
+    "dist/**",
+    "logs/**",
+    "src/database/json/**"
+  ]
+}

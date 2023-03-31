@@ -1,13 +1,23 @@
-import { Context } from 'moleculer';
+import type { Context, ActionSchema } from 'moleculer';
 
-export = {
+type Params = {
+  name: string;
+};
+
+const actionSchema: ActionSchema = {
   rest: 'GET /hello',
-  async handler(ctx: Context<{}, { '$statusCode': number }>) {
+  params: {
+    name: 'string',
+  },
+  handler(ctx: Context<Params, { '$statusCode': number }>) {
+    const { name } = ctx.params;
     ctx.meta.$statusCode = 200;
 
     return {
       code: 200,
-      message: 'Hello, world!',
+      message: `Hello ${name}, world!`,
     };
   },
 };
+
+export default actionSchema;

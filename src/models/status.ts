@@ -1,6 +1,6 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 
-export default class Status {
+export class Status {
   readonly _id: Id;
 
   @prop({ type: String, required: true })
@@ -10,4 +10,4 @@ export default class Status {
   public active: boolean;
 }
 
-export const statusModel = getModelForClass(Status);
+export const StatusModel = getModelForClass(Status);

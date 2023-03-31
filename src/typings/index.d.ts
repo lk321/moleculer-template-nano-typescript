@@ -28,15 +28,6 @@ declare global {
     update(id: Id, entity: T): Promise<T>;
     delete(id: Id): Promise<boolean>;
   }
-
-  type LoaderOptions = {
-    dbOptions?: Optional<{
-      dbName?: string;
-      authSource?: string;
-      directConnection?: boolean;
-      autoIndex?: boolean;
-    }>;
-  };
 }
 
 // disable automatic export

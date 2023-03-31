@@ -2,20 +2,30 @@
   "env": {
     "browser": true,
     "node": true,
-    "es2021": true,
-    "jest": true
+    "es2021": true
   },
-  "extends": ["airbnb-base", "airbnb-typescript/base", "plugin:sonarjs/recommended"],
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:sonarjs/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": ["test/*", "dist/*"],
   "parserOptions": {
-    "project": "tsconfig.json",
+    "project": "tsconfig.eslint.json",
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["prefer-arrow", "import", "@typescript-eslint", "sonarjs"],
   "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "import/prefer-default-export": "off",
     "class-methods-use-this": "off"
-  }
+  },
+  "overrides": [{
+    "files": ["tests/**/*.ts"],
+    "env": { "jest": true }
+  }]
 }

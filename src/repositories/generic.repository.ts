@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { NotFound } from 'http-errors';
 import { getModelForClass } from '@typegoose/typegoose';
 import { AnyParamConstructor, ReturnModelType } from '@typegoose/typegoose/lib/types';
@@ -32,7 +35,7 @@ extends AnyParamConstructor<any>> implements Read<T>, Write<T> {
 
   async findOne(query: Partial<T>, selection?: Partial<T>): Promise<T> {
     const entity = await this.model
-      .findOne(query as any)
+      .findOne(query as never)
       .select(selection)
       .populate(this.populates)
       .exec();
@@ -51,7 +54,7 @@ extends AnyParamConstructor<any>> implements Read<T>, Write<T> {
   }
 
   async update(id: Id, entity: Partial<T>): Promise<T> {
-    const entityFound = this.findById(id);
+    const entityFound = await this.findById(id);
 
     if (!entityFound) {
       throw new Error('Entity not found');

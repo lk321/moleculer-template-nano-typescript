@@ -1,10 +1,15 @@
-import Repository from '../repositories/status.repository';
+import type { ActionSchema } from 'moleculer';
+import Container from 'typedi';
 
-export = {
+import StatusService from '../services/status';
+
+const actionSchema: ActionSchema = {
   rest: 'GET /status',
-  async handler() {
-    const repository = new Repository();
+  handler() {
+    const service = Container.get(StatusService);
 
-    return repository.count();
+    return service.count();
   },
 };
+
+export default actionSchema;

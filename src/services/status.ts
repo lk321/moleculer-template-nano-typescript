@@ -1,7 +1,9 @@
-import GenericRepository from './generic.repository';
+import { Service } from 'typedi';
 
-import Status from '../entities/status';
+import GenericRepository from '../repositories/generic.repository';
+import { Status } from '../models/status';
 
+@Service()
 export default class StatusRepository extends GenericRepository<typeof Status> {
   constructor() {
     super(Status, ['type', 'warehouse']);

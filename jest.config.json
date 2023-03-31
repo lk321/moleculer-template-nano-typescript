@@ -1,0 +1,20 @@
+{
+  "roots": [
+    "<rootDir>/tests",
+    "<rootDir>/src"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "ts",
+    "json"
+  ],
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "testMatch": [
+    "**/tests/**/*.+(ts|js)",
+    "**/?(*.)+(spec|test).ts?(x)"
+  ],
+  "transform": {
+    "^.+\\.ts?$": "ts-jest"
+  }
+}
